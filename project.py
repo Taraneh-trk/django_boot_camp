@@ -1,4 +1,4 @@
-import csv ,re
+import csv ,re, sys
             
 
 class menu:
@@ -33,23 +33,25 @@ class menu:
                 with open(self.filename,'a') as f:
                     writer = csv.DictWriter(f,fieldnames=['name','phone','email'])
                     writer.writerow({'name':name,'phone':phone,'email':email})
+                print('added succusfully')
                 break
             else:
                 print('try again')
 
     def remove(self):
-        name,phone,email = input('enter (name phonenumber email) who you want to remove : ').split(' ')
+        name = input('enter name who you want to remove : ')
         d = []
         with open(self.filename,'r+') as f:
             reader = csv.DictReader(f)
             for i in reader:
-                if i['name']==name and i['phone']==phone and i['email']==email:
+                if i['name']==name :
                     continue
                 d.append(i)
         with open(self.filename,'w') as f:
             writer = csv.DictWriter(f,fieldnames=['name','phone','email'])
             writer.writeheader()
             writer.writerows(d)
+        print('removed succusfully')
         
     def show(self):
         with open(self.filename,'r') as f:
@@ -61,7 +63,7 @@ class menu:
                 print()
 
     def modify(self):
-        name_want_to_change = input('enter name you want to change : ')
+        name_want_to_change,phone_want_to_change,email_want_to_change = input('enter (name phonenumber email) you want to change : ').split(' ')
         name,phone,email = input('enter (name phonenumber email) who you want to change to : ').split(' ')
         while True:
             if check(phone,email):
@@ -69,7 +71,7 @@ class menu:
                 with open(self.filename,'r+') as f:
                     reader = csv.DictReader(f)
                     for i in reader:
-                        if i['name']==name_want_to_change:
+                        if i['name']==name_want_to_change and i['phone']==phone_want_to_change and i['email']==email_want_to_change:
                             dict = {'name': name, 'phone': phone, 'email': email}
                             d.append(dict)
                             continue
@@ -78,6 +80,7 @@ class menu:
                     writer = csv.DictWriter(f,fieldnames=['name','phone','email'])
                     writer.writeheader()
                     writer.writerows(d)
+                print('modified succusfully')
                 break
             else:
                 print('try again')
@@ -93,7 +96,7 @@ class menu:
             writer = csv.DictWriter(f,fieldnames=['name','phone','email'])
             writer.writeheader()
             writer.writerows(d)
-
+        print('sorted succusfully')
 
 def check(phone,email):
     if re.search('\d{11}',phone) and re.search('(\S+)@gmail\.com',email):
