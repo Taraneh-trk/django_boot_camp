@@ -1,0 +1,1 @@
+https://github.com/Taraneh-trk/django_boot_camp.git
