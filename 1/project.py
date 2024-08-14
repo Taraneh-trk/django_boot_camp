@@ -1,9 +1,11 @@
-import csv ,re, sys
+import csv ,re ,os
             
 
 class menu:
     def __init__(self,filename):
         self.filename = filename
+        self.contact_number = 0
+        self.contact_number = self.num()
         while True:
             print('what do you want to do ?')
             print('1- add')
@@ -34,6 +36,7 @@ class menu:
                     writer = csv.DictWriter(f,fieldnames=['name','phone','email'])
                     writer.writerow({'name':name,'phone':phone,'email':email})
                 print('added succusfully')
+                self.contact_number +=1
                 break
             else:
                 print('try again')
@@ -52,6 +55,7 @@ class menu:
             writer.writeheader()
             writer.writerows(d)
         print('removed succusfully')
+        self.contact_number -=1
         
     def show(self):
         with open(self.filename,'r') as f:
@@ -97,6 +101,13 @@ class menu:
             writer.writeheader()
             writer.writerows(d)
         print('sorted succusfully')
+    
+    def num(self):
+        with open(self.filename,'r') as f:
+            reader = csv.DictReader(f)
+            for i in reader:
+                self.contact_number+=1
+        return self.contact_number
 
 def check_phone(phone):
     if re.search('\d{11}',phone):
@@ -114,9 +125,16 @@ def check(phone , email):
     return False
 
 def main():
-    file = open('project.csv','a')
-    writer = csv.DictWriter(file,fieldnames=['name','phone','email'])
-    file.close()
+    
+    
+    
+    if os.path.exists('project.csv'):
+        pass
+    else:
+        file = open('project.csv','a+')
+        writer = csv.DictWriter(file,fieldnames=['name','phone','email'])
+        writer.writeheader()
+        file.close()
     m = menu('project.csv')
 
 if __name__=="__main__":
