@@ -98,13 +98,26 @@ class menu:
             writer.writerows(d)
         print('sorted succusfully')
 
-def check(phone,email):
-    if re.search('\d{11}',phone) and re.search('(\S+)@gmail\.com',email):
+def check_phone(phone):
+    if re.search('\d{11}',phone):
         return True
     return False
 
+def check_email(email):
+    if re.search('(\S+)@gmail\.com',email):
+        return True
+    return False
 
-file = open('project.csv','a')
-writer = csv.DictWriter(file,fieldnames=['name','phone','email'])
-file.close()
-m = menu('project.csv')
+def check(phone , email):
+    if check_phone(phone) and check_email(email):
+        return True
+    return False
+
+def main():
+    file = open('project.csv','a')
+    writer = csv.DictWriter(file,fieldnames=['name','phone','email'])
+    file.close()
+    m = menu('project.csv')
+
+if __name__=="__main__":
+    main()
