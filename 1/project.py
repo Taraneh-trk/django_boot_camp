@@ -7,6 +7,7 @@ class menu:
         self.contact_number = 0
         self.contact_number = self.num()
         while True:
+            print('the correct format of phone has 11 numbers and the correct format of email is like "...@gmail.com" ')
             print('what do you want to do ?')
             print('1- add')
             print('2- remove')
@@ -14,7 +15,11 @@ class menu:
             print('4- modify')
             print('5- sort')
             print('6- exit')
-            choice = int(input('enter number of your choice : '))
+            try:
+                choice = int(input('enter number of your choice : '))
+            except:
+                print('write the number of your choice')
+                continue
             if choice==1:
                 self.add()
             elif choice==2:
