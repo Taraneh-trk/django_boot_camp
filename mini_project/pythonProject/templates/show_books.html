@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %} library show book page {% endblock %}
+
+{% block content %}
+<h1>BOOKS</h1>
+{% for book in books %}
+<h3> title : {{book.title}} </h3>
+<p>author :  {{book.authors}} </p>
+<p> price : {{book.price}} </p>
+<p> publication_date :  {{book.publication_date}} </p>
+<p> description : {{book.description}} </p>
+{% endfor %}
+{% endblock %}
