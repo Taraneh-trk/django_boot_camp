@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block title %}Library Filter Book by Date Page{% endblock %}
+
+{% block content %}
+<style>
+  .container {
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+  }
+
+  .book-item {
+    border-bottom: 1px solid #ddd;
+    padding: 15px 0;
+    margin-bottom: 15px;
+  }
+
+  .book-item:last-child {
+    border-bottom: none;
+  }
+
+  .book-item h3 {
+    margin: 0;
+    color: #3498db;
+  }
+
+  .book-item p {
+    margin: 5px 0;
+    color: #555;
+  }
+
+  .book-item p span {
+    font-weight: bold;
+  }
+</style>
+
+<div class="container">
+  <h1>Ordered Books</h1>
+  {% for book in ordered_book %}
+    <div class="book-item">
+      <h3>Title: {{ book.title }}</h3>
+      <p><span>Author:</span> {{ book.authors }}</p>
+      <p><span>Price:</span> ${{ book.price }}</p>
+      <p><span>Publication Date:</span> {{ book.publication_date }}</p>
+      <p><span>Description:</span> {{ book.description }}</p>
+    </div>
+  {% empty %}
+    <p>No books found.</p>
+  {% endfor %}
+</div>
+{% endblock %}

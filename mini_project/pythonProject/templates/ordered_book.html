@@ -1,14 +1,14 @@
 {% extends "base.html" %}
 
-{% block title %}Library Show Books Page{% endblock %}
+{% block title %}Library Filter Book by Date Page{% endblock %}
 
 {% block content %}
 <style>
   .container {
-    max-width: 900px;
+    max-width: 800px;
     margin: 30px auto;
     padding: 20px;
-    background: #f9f9f9;
+    background: #fff;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
@@ -20,18 +20,19 @@
   }
 
   .book-item {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 20px;
-    margin-bottom: 20px;
-    background: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    border-bottom: 1px solid #ddd;
+    padding: 15px 0;
+    margin-bottom: 15px;
+  }
+
+  .book-item:last-child {
+    border-bottom: none;
   }
 
   .book-item h3 {
     margin: 0;
     color: #3498db;
-    font-size: 22px;
+    font-size: 20px;
   }
 
   .book-item p {
@@ -41,7 +42,6 @@
 
   .book-item p span {
     font-weight: bold;
-    color: #333;
   }
 
   .no-books {
@@ -52,9 +52,9 @@
 </style>
 
 <div class="container">
-  <h1>Books</h1>
-  {% if books %}
-    {% for book in books %}
+  <h1>Ordered Books</h1>
+  {% if ordered_book %}
+    {% for book in ordered_book %}
       <div class="book-item">
         <h3>Title: {{ book.title }}</h3>
         <p><span>Author:</span> {{ book.authors }}</p>
@@ -64,7 +64,7 @@
       </div>
     {% endfor %}
   {% else %}
-    <p class="no-books">No books available.</p>
+    <p class="no-books">No books found.</p>
   {% endif %}
 </div>
 {% endblock %}
