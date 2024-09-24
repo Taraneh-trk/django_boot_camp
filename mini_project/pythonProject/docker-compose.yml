@@ -1,0 +1,7 @@
+services:
+  web:
+    build: .
+    command: python manage.py runserver
+    volumes:
+      - .:/app
+  
