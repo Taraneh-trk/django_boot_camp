@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block title %}Library filter Book by price and date Page{% endblock %}
+
+{% block content %}
+<style>
+  .container {
+    max-width: 600px;
+    margin: 30px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .form-group {
+    margin-bottom: 15px;
+  }
+
+  label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #555;
+  }
+
+  input[type="text"],
+  input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    font-size: 16px;
+    box-sizing: border-box;
+  }
+
+  input[type="submit"] {
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  input[type="submit"]:hover {
+    background-color: #2980b9;
+  }
+
+  .form-error {
+    color: red;
+    font-size: 0.9em;
+    margin-top: 5px;
+  }
+</style>
+
+<div class="container">
+  <h1>filter  Book by price and date</h1>
+  <form method="post">
+    {% csrf_token %}
+    {% for field in form %}
+      <div class="form-group">
+        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+        {{ field }}
+        {% if field.errors %}
+          <div class="form-error">
+            {% for error in field.errors %}
+              <p>{{ error }}</p>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+    {% endfor %}
+    <input type="submit" value="submit">
+  </form>
+</div>
+{% endblock %}

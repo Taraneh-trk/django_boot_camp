@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block title %}Library Search Book by Name Page{% endblock %}
+
+{% block content %}
+<style>
+  .container {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+  }
+
+  .book-item {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 20px;
+    background: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+
+  .book-item h2 {
+    margin-top: 0;
+    color: #3498db;
+  }
+
+  .book-item p {
+    margin: 5px 0;
+    color: #555;
+  }
+
+  .book-item p span {
+    font-weight: bold;
+    color: #333;
+  }
+</style>
+
+<div class="container">
+  <h1>Search Results</h1>
+  {% if books %}
+    {% for book in books %}
+      <div class="book-item">
+        <h2>Title: {{ book.title }}</h2>
+        <p><span>Author:</span> {{ book.authors }}</p>
+        <p><span>Price:</span> ${{ book.price }}</p>
+        <p><span>Publication Date:</span> {{ book.publication_date }}</p>
+        <p><span>Description:</span> {{ book.description }}</p>
+      </div>
+    {% endfor %}
+  {% else %}
+    <p>No books found.</p>
+  {% endif %}
+</div>
+{% endblock %}
